@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Websocket</title>
+</head>
+
+<body>
+  <div>
+    <input placeholder="Hello 😉" id="input-send-data" type="search" />
+    <button onclick="sendData()">Send data</button>
+  </div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:8000');
+    ws.onopen = () => {
+      console.log('Connected');
+    };
+    ws.onmessage = (event) => {
+      console.log(event);
+    };
+
+    function sendData() {
+      const inputValue = document.getElementById('input-send-data').value;
+
+      if (inputValue !== "") {
+        ws.send(JSON.stringify(inputValue));
+      }
+    }
+  </script>
+</body>
+
+</html>
