@@ -1,7 +1,15 @@
-FROM mcr.microsoft.com/appsvc/node:10-lts
+FROM node:16-alpine
 
-ENV HOST 0.0.0.0
-ENV PORT 8000
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
 EXPOSE 8000
 
-ENTRYPOINT ["pm2", "start", "--no-daemon", "/opt/startup/default-static-site.js"]
+CMD ["npm", "start"]

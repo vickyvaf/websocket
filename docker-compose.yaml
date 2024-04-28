@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  ws:
+    container_name: ws_server
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "node ."
